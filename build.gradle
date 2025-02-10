@@ -11,8 +11,15 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    maven {
-        url "https://maven.nova-committee.cn/releases"
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://cursemaven.com"
+            }
+        }
+        filter {
+            includeGroup "curse.maven"
+        }
     }
 }
 
@@ -24,7 +31,9 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation("committee.nova.mkb.fabric:mkb-1.19.2:1.0.0") {
+
+    // Modern key binding
+    modImplementation("curse.maven:modern-keybinding-fabric-695433:${project.mkb_version_cf}") {
         transitive = false
     }
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
